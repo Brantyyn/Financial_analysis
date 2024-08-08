@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<html><head><base href="https://www.tradingview.com/">
+<title>TradingView Charts: BTCUSDT - Dark Theme</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #1e222d;
+    color: #d1d4dc;
+  }
+  .container {
+    display: flex;
+    height: 100vh;
+    margin-right: 30px;
+  }
+  .chart-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #2a2e39;
+    position: relative;
+  }
+  .chart-section:last-child {
+    border-right: none;
+  }
+  .chart {
+    flex: 1;
+  }
+  h2 {
+    margin: 0;
+    padding: 10px;
+    background-color: #2a2e39;
+    color: #d1d4dc;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .resize-handle::after {
+    content: '⋮';
+    color: #848e9c;
+    font-size: 18px;
+  }
+  .symbol-changer {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    background-color: #2a2e39;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  .symbol-changer input {
+    margin-right: 5px;
+    padding: 5px;
+    background-color: #1e222d;
+    color: #d1d4dc;
+    border: 1px solid #4a4a4a;
+  }
+  .symbol-changer button {
+    padding: 5px 10px;
+    background-color: #2962ff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .symbol-changer button:hover {
+    background-color: #1e53e5;
+  }
+</style>
+</head>
+<body class="ml-0 mr-0 ">
+
+  <div class="container">
+    <div class="chart-section">
+      <div id="tradingview_1d" class="chart"></div>
+    </div>
+
+  </div>
+
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script type="text/javascript">
+    let widgets = {};
+
+    function createWidget(container, symbol, interval) {
+      if (widgets[container]) {
+        widgets[container].remove();
+      }
+
+      widgets[container] = new TradingView.widget({
+        "width": "125%",
+        "margin": 0,
+        "height": "100%",
+        "symbol": symbol,
+        "interval": interval,
+        "timezone": "Etc/UTC",
+        "theme": "dark",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#2a2e39",
+        "enable_publishing": false,
+        "allow_symbol_change": true,
+        "container_id": container,
+        "hide_side_toolbar": false,
+        "studies_overrides": {},
+      });
+    }
+
+
+ 
+    
+
+    function initCharts(symbol) {
+      createWidget("tradingview_1d", symbol, "D");
+      createWidget("tradingview_1h", symbol, "60");
+      createWidget("tradingview_5m", symbol, "5");
+    }
+    
+
+    function changeSymbol() {
+      const newSymbol = document.getElementById('symbolInput').value;
+      if (newSymbol) {
+        initCharts(newSymbol);
+      } else {
+        alert("Please enter a valid symbol");
+      }
+    }
+
+    // Initialize with default symbol
+    initCharts("BINANCE:BTCUSDT");
+
+    // Resizable functionality
+    const resizeHandles = document.querySelectorAll('.resize-handle');
+    let isResizing = false;
+    let currentHandle = null;
+
+    resizeHandles.forEach(handle => {
+      handle.addEventListener('mousedown', (e) => {
+        isResizing = true;
+        currentHandle = handle;
+        document.addEventListener('mousemove', resize);
+        document.addEventListener('mouseup', stopResize);
+      });
+    });
+
+    function resize(e) {
+      if (!isResizing) return;
+      const container = currentHandle.parentElement;
+      const nextContainer = container.nextElementSibling;
+      const containerRect = container.getBoundingClientRect();
+      const nextContainerRect = nextContainer.getBoundingClientRect();
+      
+      const newWidth = e.clientX - containerRect.left;
+      const nextNewWidth = nextContainerRect.right - e.clientX;
+      
+      if (newWidth > 50 && nextNewWidth > 50) {
+        container.style.flex = `0 1 ${newWidth}px`;
+        nextContainer.style.flex = `0 1 ${nextNewWidth}px`;
+      }
+    }
+
+    function stopResize() {
+      isResizing = false;
+      document.removeEventListener('mousemove', resize);
+      document.removeEventListener('mouseup', stopResize);
+    }
+
+    // Redraw charts on window resize
+    window.addEventListener('resize', () => {
+      const currentSymbol = document.getElementById('symbolInput').value || "BINANCE:BTCUSDT";
+      initCharts(currentSymbol);
+    });
+  </script>
+</body></html>
+{% endblock %}

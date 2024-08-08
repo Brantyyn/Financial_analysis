@@ -1,0 +1,96 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% tailwind_css %}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .content {
+            transition: filter 0.3s ease;
+        }
+
+        #sidebar {
+            background-color: #333;
+            color: white;
+            width: 150px;
+            height: 100vh;
+            position: fixed;
+            left: -250px;
+            top: 0;
+            z-index: 1000;
+            transition: left 0.3s ease;
+        }
+
+        #sidebar:hover,
+        #sidebar-activator:hover + #sidebar {
+            left: 0;
+        }
+
+        #sidebar-activator {
+            width: 2px;
+            height: 100vh;
+            background-color: #555;
+            position: fixed;
+            left: 0;
+            top: 0;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .sidebar-content {
+            padding: 20px;
+        }
+
+        /* Highlight sidebar content on hover */
+        .sidebar-content ul li a {
+            display: block;
+            padding: 10px;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar-content ul li a:hover {
+            border-radius: 15px;
+            background-color: #6fe212;
+        }
+
+        /* Optional: Dim content when sidebar is open */
+        #sidebar:hover ~ .content,
+        #sidebar-activator:hover ~ #sidebar ~ .content {
+            filter: brightness(0.8);
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar activator -->
+    <div id="sidebar-activator"></div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="sidebar-content">
+            <h3 class="font-semibold mb-4">Menu</h3>
+            <ul class="space-y-2">
+                <li><a href="#" class="block">Overview</a></li>
+                <li><a href="#" class="block">Reports</a></li>
+                <li><a href="#" class="block">Analytics</a></li>
+                <li><a href="#" class="block">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Content area -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
