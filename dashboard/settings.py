@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ivnn_67)re)0@m!of_()&5*4x^-lcoe*f*p__(w7%w12413d%1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['brantyynfinances.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['brantyynfinances.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
