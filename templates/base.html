@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    {% tailwind_css %}
     <style>
         body {
             margin: 0;
@@ -18,7 +17,6 @@
         }
 
         #sidebar {
-            background-color: #333;
             color: white;
             width: 150px;
             height: 100vh;
@@ -27,6 +25,7 @@
             top: 0;
             z-index: 1000;
             transition: left 0.3s ease;
+            opacity: 0.9;
         }
 
         #sidebar:hover,
@@ -47,6 +46,8 @@
 
         .sidebar-content {
             padding: 20px;
+            position: absolute;
+            bottom: 0;
         }
 
         /* Highlight sidebar content on hover */
@@ -56,6 +57,7 @@
             color: rgb(255, 255, 255);
             text-decoration: none;
             transition: background-color 0.3s ease;
+            margin-top: 5px;
         }
 
         .sidebar-content ul li a:hover {
@@ -69,21 +71,23 @@
             filter: brightness(0.8);
         }
     </style>
+    {% tailwind_css %}
+
 </head>
 <body>
     <!-- Sidebar activator -->
     <div id="sidebar-activator"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar">
+    <div id="sidebar" class="text-green-900 opacity-80">
         <div class="sidebar-content">
-            <h3 class="font-semibold mb-4">Menu</h3>
-            <ul class="space-y-2">
-                <li><a href="#" class="block">Overview</a></li>
-                <li><a href="#" class="block">Reports</a></li>
-                <li><a href="#" class="block">Analytics</a></li>
-                <li><a href="#" class="block">Settings</a></li>
-            </ul>
+            <h3 class="font-extrabold mb-4 text-3xl bg-green-600 p-5 rounded-full text-center">Menu</h3>
+            <div class="space-y-5">
+                <a href="{% url 'charts' %}" class="block bg-gray-700 p-6 rounded-full">Home</a>
+                <a href="#" class="block bg-gray-700 p-6 rounded-full">Reports</a>
+                <a href="#" class="block bg-gray-700 p-6 rounded-full">Analytics</a>
+                <a href="{% url 'data' %}" class="block bg-gray-700 p-6 rounded-full">Tables</a>
+            </div>
         </div>
     </div>
 

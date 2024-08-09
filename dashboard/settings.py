@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ivnn_67)re)0@m!of_()&5*4x^-lcoe*f*p__(w7%w12413d%1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['brantyynfinances.onrender.com', 'localhost', '127.0.0.1']
 
@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['brantyynfinances.onrender.com', 'localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'visuals',
     'tailwind',
-    'theme',
+    'themes',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-TAILWIND_APP_NAME = 'theme'
+TAILWIND_APP_NAME = 'themes'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,7 +125,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'theme/'
+STATIC_URL = 'theme/static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

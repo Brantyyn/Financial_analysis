@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import data_view
-from django.views.generic import TemplateView
+from .views import DataFormView, home
 
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='chart.html'), name='charts'),
+    path('', home.as_view(), name='charts'),
+    path('data/', DataFormView.as_view(), name='data'),
 ]

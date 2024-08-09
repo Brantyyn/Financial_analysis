@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Data(models.Model):
@@ -16,4 +17,6 @@ class Data(models.Model):
     Result = models.CharField(max_length=50)
     
     def __str__(self):
-        return self.name
+        return self.Coin
+    
+    

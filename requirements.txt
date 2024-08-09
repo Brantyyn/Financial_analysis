@@ -5,5 +5,5 @@ pip install django-tailwind
 python manage.py tailwind init
 npm install tailwindcss@latest autoprefixer@latest --save
 npm install postcss cli cross-env --save-dev
-python manage.py tailwind build
+python manage.py tailwind start
 pip install gunicorn
