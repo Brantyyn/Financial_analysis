@@ -8,21 +8,24 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
     font-family: Arial, sans-serif;
     background-color: #1e222d;
     color: #d1d4dc;
   }
   .container {
     display: flex;
-    height: 100vh;
-    margin-right: 150px;
-  }
+    height: 100vh;  /* Full viewport height */
+    width: 100vw;   /* Full viewport width */
+    margin: 0;      /* Remove any margins */
+    padding: 0;     /* Remove any padding if necessary */
+}
+
   .chart-section {
     flex: 1;
     display: flex;
     flex-direction: column;
-    border-right: 2px solid #2a2e39;
+    /* border-right: 2px solid #2a2e39; */
     position: relative;
   }
   .chart-section:last-child {
@@ -94,7 +97,7 @@
       }
 
       widgets[container] = new TradingView.widget({
-        "width": "125%",
+        "width": "100%",
         "margin": 0,
         "height": "100%",
         "symbol": symbol,
@@ -104,11 +107,12 @@
         "style": "1",
         "locale": "en",
         "toolbar_bg": "#2a2e39",
-        "enable_publishing": false,
+        "enable_publishing": true,
         "allow_symbol_change": true,
         "container_id": container,
         "hide_side_toolbar": false,
         "studies_overrides": {},
+
       });
     }
 
@@ -118,8 +122,6 @@
 
     function initCharts(symbol) {
       createWidget("tradingview_1d", symbol, "D");
-      createWidget("tradingview_1h", symbol, "60");
-      createWidget("tradingview_5m", symbol, "5");
     }
     
 

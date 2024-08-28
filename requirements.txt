@@ -3,7 +3,4 @@ pip install matplotlib
 pipenv install django
 pip install gunicorn
 pip install psycopg2-binary
-pip install django-tailwind
-python manage.py tailwind init
 
-python manage.py tailwind start
