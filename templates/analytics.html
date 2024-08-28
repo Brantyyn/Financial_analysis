@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Analytics</title>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid black;
+            }
+            th, td {
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Saved Data</h1>
+    
+        {% if data %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Coin</th>
+                        <th>Ticker</th>
+                        <th>Entry Price</th>
+                        <th>Exit Price</th>
+                        <th>Quantity</th>
+                        <th>Take Profit</th>
+                        <th>Stop Loss</th>
+                        <th>Return on Investment</th>
+                        <th>Entry Date</th>
+                        <th>Exit Date</th>
+                        <th>Holding Period</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in data %}
+                        <tr>
+                            <td>{{ item.Coin }}</td>
+                            <td>{{ item.Ticker }}</td>
+                            <td>{{ item.Entry_price }}</td>
+                            <td>{{ item.Exit_price }}</td>
+                            <td>{{ item.Quantity }}</td>
+                            <td>{{ item.Take_profit }}</td>
+                            <td>{{ item.Stop_loss }}</td>
+                            <td>{{ item.Return_on_investment }}</td>
+                            <td>{{ item.Entry_date }}</td>
+                            <td>{{ item.Exit_date }}</td>
+                            <td>{{ item.Holding_period }}</td>
+                            <td>{{ item.Result }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No data available.</p>
+        {% endif %}
+    </body>
+    </html>
+    
+
+
+{% endblock content %}

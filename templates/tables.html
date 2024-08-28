@@ -2,35 +2,159 @@
 
 {% block content %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Form</title>
+    <title>Data Entry Form</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns: labels and inputs */
+            gap: 20px;
+            margin: 0 auto; /* Center horizontally */
+            max-width: 800px; /* Optional: limits form width for better appearance */
+        }
+
+        .form-container label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="number"],
+        input[type="search"],
+        input[type="url"],
+        input[type="date"],
+        input[type="week"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-row {
+            display: contents; /* Allows grid layout to apply directly to children */
+        }
+
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50; /* Green background */
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .title {
+            font-size: 48px;
+            color: #ff0066; /* Pink color */
+            margin-bottom: 20px;
+        }
+
+        .form-container .buttons {
+            grid-column: span 2; /* Span across both columns */
+            text-align: center;
+        }
+    </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-8">
-    <div>
-        <form method="post" class="space-y-6">
-            {% csrf_token %}
-            <table class="table-auto w-full mt-6 rounded-3xl bg-stone-600">
-                <thead>
-                    <!-- Add table headers if needed -->
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="2" class="space-y-4">
-                            {{ form.as_p }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="flex justify-center mt-6">
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                    Submit
-                </button>
-            </div>
-        </form>
-    </div>
+<body>
+    <h1 class="title">Enter New Position Details</h1>
+
+    <form method="post" class="form-container">
+        {% csrf_token %}
+
+        <div class="form-row">
+            <label for="id_Coin">Coin:</label>
+            <input type="text" id="id_Coin" name="Coin" value="{{ form.Coin.value }}">
+        </div>
+
+        <div class="form-row">
+            <label for="id_Ticker">Ticker:</label>
+            <input type="text" id="id_Ticker" name="Ticker" value="{{ form.Ticker.value }}">
+        </div>
+
+        <div class="form-row">
+            <label for="id_Entry_price">Entry Price:</label>
+            <input type="number" id="id_Entry_price" name="Entry_price" value="{{ form.Entry_price.value }}">
+        </div>
+
+        <div class="form-row">
+            <label for="id_Exit_price">Exit Price:</label>
+            <input type="number" id="id_Exit_price" name="Exit_price" value="{{ form.Exit_price.value }}">
+        </div>
+
+        <div class="form-row">
+            <label for="id_Quantity">Quantity:</label>
+            <input type="number" id="id_Quantity" name="Quantity" value="{{ form.Quantity.value }}">
+        </div>
+
+        <div class="form-row">
+            <label for="id_Take_profit">Take Profit:</label>
+            <input type="number" id="id_Take_profit" name="Take_profit" value="{{ form.Take_profit.value }}">
+        </div>
+
+        <div class="form-row">
+            <label for="id_Stop_loss">Stop Loss:</label>
+            <input type="number" id="id_Stop_loss" name="Stop_loss" value="{{ form.Stop_loss.value }}">
+        </div>
+
+        <div class="form-row">
+            <label for="id_Return_on_investment">Return on Investment:</label>
+            <input type="number" id="id_Return_on_investment" name="Return_on_investment" value="{{ form.Return_on_investment.value }}">
+        </div>
+
+        <div class="form-row">
+            <label for="id_Entry_date">Entry Date:</label>
+            <input type="date" id="id_Entry_date" name="Entry_date" value="{{ form.Entry_date.value }}">
+        </div>
+
+        <div class="form-row">
+            <label for="id_Exit_date">Exit Date:</label>
+            <input type="date" id="id_Exit_date" name="Exit_date" value="{{ form.Exit_date.value }}">
+        </div>
+
+        <div class="form-row">
+            <label for="id_Holding_period">Holding Period:</label>
+            <input type="number" id="id_Holding_period" name="Holding_period" value="{{ form.Holding_period.value }}">
+        </div>
+
+        <div class="form-row">
+            <label for="id_Result">Result:</label>
+            <input type="text" id="id_Result" name="Result" value="{{ form.Result.value }}">
+        </div>
+
+        <div class="buttons">
+            <button type="submit" value='submit'>
+                Submit
+            </button>
+            <button type="button" onclick="window.history.back();">
+                Back
+            </button>
+        </div>
+    </form>
 </body>
 </html>
+
+
 {% endblock content %}

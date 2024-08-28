@@ -1,9 +1,9 @@
 pip install --upgrade pip
+pip install matplotlib
 pipenv install django
+pip install gunicorn
 pip install psycopg2-binary
 pip install django-tailwind
 python manage.py tailwind init
-npm install tailwindcss@latest autoprefixer@latest --save
-npm install postcss cli cross-env --save-dev
+
 python manage.py tailwind start
-pip install gunicorn

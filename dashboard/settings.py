@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ivnn_67)re)0@m!of_()&5*4x^-lcoe*f*p__(w7%w12413d%1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['brantyynfinances.onrender.com', 'localhost', '127.0.0.1']
 
@@ -81,12 +81,9 @@ WSGI_APPLICATION = 'dashboard.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dashboard',
-        'USER' : 'postgres',
-        'PASSWORD' : 'postgres',
-        'HOST' : 'localhost',
-        'PORT' : '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'dashboard.sqlite3',
+                
     }
 }
 
