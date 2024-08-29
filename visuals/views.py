@@ -40,38 +40,4 @@ class Analytics(TemplateView):
 
 
 
-
-# views.py
-
-import matplotlib.pyplot as plt
-from io import BytesIO
-from django.http import HttpResponse
-from django.views import View
-from django.shortcuts import render
-
-class StaticGraphView(View):
-    def get(self, request, *args, **kwargs):
-        # Generate the plot
-        plt.figure(figsize=(10, 6))
-        plt.plot([1, 2, 3, 4, 5], [10, 15, 13, 17, 12], marker='o')
-        plt.title('Static Graph Example')
-        plt.xlabel('X-axis Label')
-        plt.ylabel('Y-axis Label')
-        plt.grid(True)
-
-        # Save the plot to a BytesIO object
-        buffer = BytesIO()
-        plt.savefig(buffer, format='png')
-        buffer.seek(0)  # Rewind the buffer to the beginning
-
-        # Return the image as an HTTP response
-        return HttpResponse(buffer, content_type='image/png')
-
-class GraphPageView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'static_graph.html')
-
-
-
-
     
